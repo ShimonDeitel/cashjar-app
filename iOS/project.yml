@@ -1,0 +1,75 @@
+name: Cashjar
+options:
+  bundleIdPrefix: com.shimondeitel.cashjar
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: "W7Q885Q59C"
+    CODE_SIGN_STYLE: Automatic
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+targets:
+  Cashjar:
+    type: application
+    platform: iOS
+    sources:
+      - path: Cashjar
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.cashjar
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_FILE: Cashjar/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: "YES"
+        GENERATE_INFOPLIST_FILE: "NO"
+  CashjarTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: CashjarTests
+      - path: Cashjar.storekit
+    dependencies:
+      - target: Cashjar
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.cashjar.tests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+  CashjarUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: CashjarUITests
+    dependencies:
+      - target: Cashjar
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.cashjar.uitests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+schemes:
+  Cashjar:
+    build:
+      targets:
+        Cashjar: all
+        CashjarTests: [test]
+        CashjarUITests: [test]
+    run:
+      config: Debug
+      storeKitConfiguration: Cashjar.storekit
+    test:
+      config: Debug
+      storeKitConfiguration: Cashjar.storekit
+      targets:
+        - CashjarTests
+        - CashjarUITests
+    archive:
+      config: Release
